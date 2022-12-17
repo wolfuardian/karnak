@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
-from PySide2 import QtWidgets, QtGui
+from PySide2 import QtCore, QtGui, QtWidgets
+
+#
+# class UIMainWindow(object):
+#     @staticmethod
+#     def setup_ui(main_window):
+#         main_window.setObjectName("MainWindow")
+
 
 dialog = None
 
