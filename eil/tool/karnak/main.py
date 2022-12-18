@@ -1,74 +1,110 @@
+# -*- coding: utf-8 -*-
+import os
+import sys
+
+import glob
+
+from PySide2 import QtCore
+from PySide2 import QtUiTools
 from PySide2 import QtWidgets
-from PySide2.QtUiTools import QUiLoader
-from PySide2.QtCore import QFile
+from shiboken2 import wrapInstance
 
-# Create a UI loader
-loader = QUiLoader()
+import maya.cmds as cmds
+import maya.OpenMayaUI as omui
 
-# Load the UI file
-file = QFile('C:/Users/eos/PycharmProjects/karnak' + '/ui/file_resolver.ui')
-file.open(QFile.ReadOnly)
-my_form = loader.load(file)
-file.close()
+version = '0.0.1'
+windows_title = 'Point Editor {} (Karnak)'.format(version)
 
-# Show the form
-my_form.show()
-#
-# dialog = None
-#
-# def create_dialog():
-#     delete_dialog()
-#     global dialog
-#     if dialog is None:
-#         dialog = Dialog()
-#     dialog.show()
-#
-#
-# def delete_dialog():
-#     global dialog
-#     if dialog is None:
-#         return
-#     dialog.deleteLater()
-#     dialog = None
-#
-#
-# class Dialog(QtWidgets.QDialog):
-#     def __init__(self, parent=QtWidgets.QApplication.activeWindow()):
-#         super(Dialog, self).__init__(parent)
-#
-#         display = 1
-#         screen_size = (1920, 1080)
-#         windows_size = (720, 640)
-#         pivot = (
-#             (display * screen_size[0]) + screen_size[0] / 2 - windows_size[0] / 2,
-#             screen_size[1] / 2 - windows_size[1] / 2
-#         )
-#
-#         self.setObjectName('MainWindow')
-#         self.setWindowTitle(u'Windows Title {}'.format('0.2.6'))
-#         self.setGeometry(pivot[0], pivot[1], windows_size[0], windows_size[1])
-#         # self.setFixedWidth(720)
-#         # self.setFixedHeight(640)
-#         self.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Fixed)
-#         self.setLayout(QtWidgets.QVBoxLayout())
-#         self.layout().setContentsMargins(0, 0, 0, 0)
-#         self.layout().setSpacing(0)
-#
-#         def add_widget(_widget, _parent, _layout, ):
-#             _widget.setLayout(_layout)
-#             _widget.layout().setContentsMargins(0, 0, 0, 0)
-#             _widget.layout().setSpacing(0)
-#             _parent.layout().add_widget(_widget)
-#             return _widget
-#
-#         self.header = add_widget
-#         (
-#             QtWidgets.QFrame(),
-#             self,
-#             QtWidgets.QVBoxLayout()
-#         )
-#
-#
-# create_dialog()
+mdl_res = 'C:/Users/eos/PycharmProjects/karnak/eil/resources/models/' + 'COMPANY_SYSTEM_ASSETS'
+ui_res = 'C:/Users/eos/PycharmProjects/karnak/eil/tool/karnak/ui/ui_main.ui'
 
-# file_resolver = getQtUIClass(os.path.dirname(__file__) + '/ui/rigToolUI.ui', 'pdil.tool.fossil.ui.rigToolUI')
+
+def maya_main_window():
+    """
+    Return the Maya main window widget as a Python object
+    """
+    maya_main_ptr = omui.MQtUtil.mainWindow()
+    if sys.version_info.major >= 3:
+        return wrapInstance(int(maya_main_ptr), QtWidgets.QWidget)
+    else:
+        return wrapInstance(long(maya_main_ptr), QtWidgets.QWidget)
+
+
+class PreferencesDialog(QtWidgets.QDialog):
+    def __init__(self, parent=maya_main_window()):
+        super(PreferencesDialog, self).__init__(parent)
+
+        self.setWindowTitle("Preferences")
+        self.setMinimumSize(960, 540)
+
+        self.init_ui()
+        self.create_layout()
+        self.create_connection()
+
+    def init_ui(self):
+        loader = QtUiTools.QUiLoader()
+        self.ui = loader.load("C:/Users/eos/PycharmProjects/karnak/eil/tool/karnak/ui/preferences.ui")
+
+    def create_layout(self):
+        main_layout = QtWidgets.QVBoxLayout(self)
+        main_layout.setContentsMargins(0, 0, 0, 0)
+        main_layout.addWidget(self.ui)
+
+    def create_connection(self):
+        self.ui.okButton.clicked.connect(self.accept)
+        self.ui.cancelButton.clicked.connect(self.close)
+
+    def get_option_a(self):
+        return self.ui.checkBoxA.isChecked()
+
+    def get_option_b(self):
+        return self.ui.checkBoxB.isChecked()
+
+    def get_option_c(self):
+        return self.ui.checkBoxC.isChecked()
+
+
+class TestDialog(QtWidgets.QDialog):
+    def __init__(self, parent=maya_main_window()):
+        super(TestDialog, self).__init__(parent)
+
+        # self.setWindowTitle("Test Dialog")
+        self.setWindowTitle(windows_title)
+
+        self.setMinimumSize(960, 540)
+
+        self.init_ui()
+        self.create_layout()
+        self.create_connections()
+
+    def init_ui(self):
+        loader = QtUiTools.QUiLoader()
+        self.ui = loader.load("C:/Users/eos/PycharmProjects/karnak/eil/tool/karnak/ui/main.ui")
+
+    def create_layout(self):
+        main_layout = QtWidgets.QVBoxLayout(self)
+        main_layout.setContentsMargins(2, 2, 2, 2)
+        main_layout.setSpacing(2)
+        main_layout.addWidget(self.ui)
+
+    def create_connections(self):
+        self.ui.preferences_action.triggered.connect(self.show_preferences)
+
+    def show_preferences(self):
+        preferences_dialog = PreferencesDialog(self)
+        result = preferences_dialog.exec_()
+
+        if result == QtWidgets.QDialog.Accepted:
+            print("Option A Checked: {0}".format(preferences_dialog.get_option_a()))
+            print("Option B Checked: {0}".format(preferences_dialog.get_option_b()))
+            print("Option C Checked: {0}".format(preferences_dialog.get_option_c()))
+
+
+test_dialog = None
+try:
+    test_dialog.cloes()
+    test_dialog.deleteLater()
+except:
+    pass
+test_dialog = TestDialog()
+test_dialog.show()
