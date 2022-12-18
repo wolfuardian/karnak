@@ -3,8 +3,8 @@ from PySide2 import QtWidgets, QtGui
 from shiboken2 import wrapInstance
 
 # Get the main Maya window as a Qt widget
-main_window = OpenMayaUI.MQtUtil.mainWindow()
-window = wrapInstance(int(main_window), QtWidgets.QWidget)
+window = OpenMayaUI.MQtUtil.mainWindow()
+window = wrapInstance(int(window), QtWidgets.QWidget)
 
 for child in window.children()[:]:
     print(child.objectName())
