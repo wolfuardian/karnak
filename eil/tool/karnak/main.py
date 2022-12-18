@@ -15,10 +15,6 @@ import maya.OpenMayaUI as omui
 version = '0.0.1'
 windows_title = 'Point Editor {} (Karnak)'.format(version)
 
-mdl_res = 'C:/Users/eos/PycharmProjects/karnak/eil/resources/models/' + 'COMPANY_SYSTEM_ASSETS'
-ui_res = 'C:/Users/eos/PycharmProjects/karnak/eil/tool/karnak/ui/ui_main.ui'
-
-
 def maya_main_window():
     """
     Return the Maya main window widget as a Python object
@@ -64,11 +60,12 @@ class PreferencesDialog(QtWidgets.QDialog):
         return self.ui.checkBoxC.isChecked()
 
 
-class TestDialog(QtWidgets.QDialog):
+class MainDialog(QtWidgets.QDialog):
     def __init__(self, parent=maya_main_window()):
-        super(TestDialog, self).__init__(parent)
+        super(MainDialog, self).__init__(parent)
 
         # self.setWindowTitle("Test Dialog")
+        self.ui = None
         self.setWindowTitle(windows_title)
 
         self.setMinimumSize(960, 540)
@@ -100,11 +97,13 @@ class TestDialog(QtWidgets.QDialog):
             print("Option C Checked: {0}".format(preferences_dialog.get_option_c()))
 
 
-test_dialog = None
-try:
-    test_dialog.cloes()
-    test_dialog.deleteLater()
-except:
-    pass
-test_dialog = TestDialog()
-test_dialog.show()
+if __name__ == "__main__":
+    try:
+        main_dialog.close()
+        main_dialog.deleteLater()
+
+    except AttributeError:
+        print("AttributeError: Will skip")
+        pass
+    main_dialog = MainDialog()
+    main_dialog.show()
