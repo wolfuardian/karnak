@@ -1,6 +1,6 @@
-如何使用 PyCharm 編寫 Maya 介面
+# 如何使用 PyCharm 編寫 Maya 介面
 
-所需環境：
+## 所需環境：
 1. 安裝 Maya 2017 以上的版本，具體版本對應請參閱：https://www.cnblogs.com/ibingshan/p/9764886.html
 2. PyCharm 最新版本 2022.3，下載頁面：https://www.jetbrains.com/pycharm/
    1. 安裝 MayaCharm 外掛
@@ -32,4 +32,4 @@
    5. 點擊並在 Maya 視窗中察看結果
    <br>![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/example_window.png)
    <br>![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/docking_window.png)
-   <br>![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/docked_window.png)
+   ![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/docked_window.png)
