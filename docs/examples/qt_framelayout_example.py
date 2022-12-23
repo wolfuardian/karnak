@@ -5,9 +5,11 @@ from PySide2 import QtWidgets
 from PySide2 import QtGui
 from maya.app.general.mayaMixin import MayaQWidgetDockableMixin
 
+
 class QtDefaultWidget(QtWidgets.QWidget):
     """QWidgetの自動削除Attribute設定
     """
+
     def __init__(self, parent=None, *args, **kwargs):
         super(QtDefaultWidget, self).__init__(parent=parent, *args, **kwargs)
         self.setAttribute(QtCore.Qt.WA_DeleteOnClose)
@@ -36,6 +38,7 @@ class FrameLayoutWidget(MayaQWidgetDockableMixin, QtWidgets.QWidget):
         #
         #     # FrameLayoutにボタンを追加
         #     self.__dummy_frame.frame_layout.addWidget(btn)
+
 
 if __name__ == "__main__":
     button = FrameLayoutWidget()
