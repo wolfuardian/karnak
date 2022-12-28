@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>About</class>
+ <widget class="QWidget" name="About">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>584</width>
+    <height>630</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="acceptDrops">
+   <bool>false</bool>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="autoFillBackground">
+   <bool>false</bool>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <property name="spacing">
+      <number>8</number>
+     </property>
+     <property name="leftMargin">
+      <number>8</number>
+     </property>
+     <property name="topMargin">
+      <number>8</number>
+     </property>
+     <property name="rightMargin">
+      <number>8</number>
+     </property>
+     <property name="bottomMargin">
+      <number>8</number>
+     </property>
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>版本: Karnak 0.0.9</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QTextBrowser" name="textBrowser_2">
+       <property name="maximumSize">
+        <size>
+         <width>16777215</width>
+         <height>16777215</height>
+        </size>
+       </property>
+       <property name="html">
+        <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'PMingLiU'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;本工具致力於協助 MAYA 端用戶設置設備點位分布 ...&lt;br /&gt;以求達到與 Unity 端用戶之間的有效協作。&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;最佳環境:&lt;br /&gt;Unity-2019.2.10f1&lt;br /&gt;Maya2020.4&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque eget lacus in dui ornare tincidunt. Nunc et euismod magna. Fusce et ipsum eu augue imperdiet tempus. Nullam pharetra nec ligula eget tempus. Mauris at lacus non urna egestas iaculis. Proin ipsum massa, venenatis vel dui vel, ultricies ornare nulla. Donec eleifend ante in erat interdum consectetur. Suspendisse luctus ultricies arcu, sit amet accumsan nibh auctor sed. Nam sapien massa, posuere eget massa sit amet, placerat dignissim tellus. Integer ac quam a elit aliquet porta ac vel nunc. Ut fermentum tincidunt scelerisque. Mauris enim nisl, vehicula at sagittis vestibulum, condimentum eu libero. Sed quis consequat eros. Donec viverra varius venenatis.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Duis congue molestie diam nec molestie. Morbi viverra pharetra tellus eget tincidunt. Phasellus at lacus eleifend, volutpat velit vitae, ultrices nunc. Donec tellus turpis, auctor at congue a, interdum et elit. Curabitur luctus justo vel justo consequat, ut porttitor eros finibus. Mauris tristique mi quis sapien dictum, sed consectetur massa suscipit. Sed accumsan scelerisque lectus, vitae volutpat lorem efficitur sit amet. Integer tempus, massa ut laoreet imperdiet, libero neque varius nulla, non tristique felis mi et neque. Aliquam fringilla non nunc id mattis. Aliquam sodales at sapien vel suscipit. Curabitur augue nulla, sodales quis semper in, dignissim nec sem. Donec tempor aliquet auctor. Quisque mattis porttitor sapien, sit amet consequat tortor. Quisque vitae odio tristique nibh tincidunt ornare nec at sapien.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Donec eros lacus, fermentum sit amet rutrum quis, vulputate sed libero. Mauris eu mollis quam. Vivamus ultrices tempor felis, eget aliquet turpis elementum eget. Ut vel lectus et erat suscipit bibendum. Sed facilisis vulputate sapien condimentum viverra. Praesent nec venenatis leo, sed fermentum turpis. Cras scelerisque scelerisque arcu a congue. Quisque euismod faucibus semper.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Cras et eros pellentesque, vestibulum ipsum sed, convallis enim. Phasellus egestas pharetra dui, bibendum consequat elit. Proin eu nibh at sapien blandit facilisis non id velit. Proin varius ac ex quis feugiat. Curabitur vitae libero nulla. Nulla egestas dapibus gravida. Nulla a ex in felis cursus tempor. Morbi faucibus urna bibendum, convallis elit ac, imperdiet nisi. Suspendisse potenti. Etiam porta nunc in lacus imperdiet, non tincidunt lacus lobortis. Fusce sit amet scelerisque sapien, nec bibendum neque. Nam ornare congue vulputate. Ut scelerisque aliquam maximus.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Nulla facilisi. Donec rhoncus accumsan dolor in commodo. Nam placerat vel eros eget viverra. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque egestas tortor ac nunc rutrum commodo. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. In eget neque at leo efficitur auctor at tristique nulla. Maecenas aliquet eros ac volutpat volutpat. Nunc eu luctus mauris, ut luctus sem. Nunc volutpat nisi quis est bibendum finibus. Ut eget bibendum ante, sit amet euismod urna. Ut auctor eros nec augue sodales varius. Donec finibus aliquam euismod. Suspendisse eleifend erat in consectetur placerat. Ut viverra convallis nisi, non tristique tellus consectetur vitae. Fusce tincidunt, lectus vel malesuada imperdiet, enim odio vehicula felis, non egestas sapien enim eget ex.&lt;/p&gt;
+&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Mauris sed massa ex. Etiam ac arcu suscipit, scelerisque ligula ac, blandit augue. Etiam sollicitudin sem tortor, ut convallis arcu ultricies quis. Proin sit amet pharetra enim. Vestibulum aliquam lorem neque, euismod vehicula massa placerat eget. Quisque cursus tempus nisi sit amet bibendum. Cras vitae ipsum in justo feugiat fermentum. Donec finibus purus sit amet cursus tincidunt. Nam pretium lacinia orci, non gravida leo vulputate placerat. Vestibulum quam sapien, pellentesque eu pellentesque ut, condimentum sed leo. Nunc faucibus non diam in dapibus.&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Proin vitae commodo felis, id fringilla velit. Donec mollis quis lorem eget mollis. Sed malesuada tortor quis dui blandit suscipit. Aenean vehicula interdum tellus in consequat. Fusce maximus feugiat arcu vel mattis. Vivamus fermentum nunc faucibus convallis semper. Nullam congue lacus ac ex sagittis, eget faucibus ligula placerat. Integer eu nisi vitae odio posuere feugiat id nec quam. Vivamus ac risus eget nulla rhoncus ullamcorper. Mauris et volutpat justo. Etiam pellentesque arcu nec aliquet mattis. In vulputate ipsum ultricies nibh malesuada sollicitudin. Donec nulla erat, pulvinar sit amet lectus ut, aliquet blandit massa. Nulla nec justo sit amet lacus malesuada sollicitudin at eu sem.&lt;/p&gt;
+&lt;p style=&quot;-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;br /&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;Vivamus eu tincidunt mauris. In hac habitasse platea dictumst. Morbi quis nunc dapibus, dictum felis maximus, finibus nunc. Aenean vel orci dolor. Integer vel arcu consequat, varius diam eu, lacinia lorem. Pellentesque luctus id mi sit amet euismod. Curabitur tristique elementum turpis vel aliquam.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="ok_button">
+       <property name="text">
+        <string>關閉</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../frame/pic.qrc"/>
+ </resources>
+ <connections/>
+</ui>

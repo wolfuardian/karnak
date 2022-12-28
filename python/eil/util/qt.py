@@ -39,13 +39,12 @@ class _FrameButton(QtWidgets.QWidget):
         self.__close_pix = QtGui.QPixmap(':/teRightArrow.png')
         self.__open_pix = QtGui.QPixmap(':/teDownArrow.png')
 
-        self.setMinimumSize(280, 20)
+        self.setMinimumSize(288, 32)
         self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Fixed)
         self.setAutoFillBackground(True)
 
-        p = self.palette()
-        p.setColor(self.backgroundRole(), QtGui.QColor(93, 93, 93))
-        self.setPalette(p)
+        # self.setBackgroundColor((93, 93, 93))  # Light
+        self.setBackgroundColor((60, 60, 60))  # Dark
 
         layout = QtWidgets.QHBoxLayout()
         layout.setContentsMargins(5, 0, 5, 0)
@@ -59,7 +58,7 @@ class _FrameButton(QtWidgets.QWidget):
 
         layout.addWidget(self.__label)
 
-        self.__toggle = False
+        self.__toggle = True
         self.__collapsed = common.Subject()
         self.__expanded = common.Subject()
         self.__collapsed.listen.add(lambda: self.__icon.setPixmap(self.__close_pix))
@@ -130,12 +129,13 @@ class FrameLayout(QtWidgets.QWidget):
         self.setSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         layout = QtWidgets.QVBoxLayout()
         layout.setContentsMargins(0, 0, 0, 0)
-        layout.setSpacing(3)
+        layout.setSpacing(0)
         layout.setAlignment(QtCore.Qt.AlignTop)
         self.setLayout(layout)
 
-        self.__frame_btn = _FrameButton('Option')
+        self.__frame_btn = _FrameButton('Frame Button')
         self.__frame_btn.setObjectName('frame_btn')
+        self.__frame_btn.setFont(QtGui.QFont("Microsoft JhengHei", 10, QtGui.QFont.Bold))
         self.__frame_btn.collapsed.add(self.__on_collapsed)
         self.__frame_btn.expanded.add(self.__on_expanded)
 
@@ -144,19 +144,14 @@ class FrameLayout(QtWidgets.QWidget):
 
         self.__frame_layout = QtWidgets.QVBoxLayout(self.__frame)
         self.__frame_layout.setObjectName('frame_layout')
-        self.__frame_layout.setMargin(0)
-        self.__frame_layout.setSpacing(2)
+        # self.__frame_layout.setContentsMargins(8, 8, 0, 8)
+        self.__frame_layout.setContentsMargins(0, 0, 0, 0)
+        self.__frame_layout.setSpacing(0)
 
         self.layout().addWidget(self.__frame_btn)
         self.layout().addWidget(self.__frame)
 
-        self.layout().addWidget(self.__frame_btn)
-        self.layout().addWidget(self.__frame)
-
-        self.layout().addWidget(self.__frame_btn)
-        self.layout().addWidget(self.__frame)
-
-        self.__frame_btn.toggle = True
+        # self.__frame_btn.toggle = True
 
     @property
     def frame_btn(self):
@@ -172,6 +167,9 @@ class FrameLayout(QtWidgets.QWidget):
         """
         return self.__frame_layout
 
+    def collapsed(self):
+        self.__on_collapsed()
+
     def __on_collapsed(self):
         """
         Hide Item in Layout when _FrameButton is closed
@@ -185,5 +183,3 @@ class FrameLayout(QtWidgets.QWidget):
         """
         for item in self.__frame.findChildren(QtWidgets.QWidget):
             item.setVisible(True)
-
-

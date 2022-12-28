@@ -1,0 +1,11 @@
+<RCC>
+  <qresource prefix="/">
+    <file>first_activation.png</file>
+  </qresource>
+  <qresource prefix=":/">
+    <file>teLeftArrow.png</file>
+    <file>teUpArrow.png</file>
+    <file>teRightArrow.png</file>
+    <file>teDownArrow.png</file>
+  </qresource>
+</RCC>
