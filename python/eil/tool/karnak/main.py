@@ -2,12 +2,18 @@
 from __future__ import print_function, division, absolute_import
 
 import functools
+import os
+
+import pymel.core as pm
+import maya.cmds as cmds
 
 from PySide2 import QtCore, QtGui, QtWidgets, QtUiTools
 from maya.app.general import mayaMixin
 
-from python.eil.util import common, qt
+from python.eil.util import common, qt, io
 from python.eil.mixin import menu
+
+import glob
 
 widget_id = 'Karnak ( Dev )'
 ui_path = "C:/Users/eos/PycharmProjects/karnak/python/eil/tool/karnak/ui"
@@ -55,6 +61,7 @@ class AboutDialog(QtWidgets.QDialog):
 class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidgetBaseMixin, qt.QtDefaultWidget):
     def __init__(self, parent=qt.maya_main_window()):
         super(FrameLayoutWidget, self).__init__(parent)
+        self.resources_dicts = {}
         self.setWindowTitle(widget_id)
 
         # Used to control the size of the window
@@ -138,11 +145,13 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
         """
         Settings __dummy_frame
         """
+        self.__get_all_frames = []
         # 1
-        self.__introduction_frame = qt.FrameLayout(self)
-        self.__introduction_frame.frame_btn.setText('教學')
-        self.__introduction_frame.frame_layout.setContentsMargins(0, 0, 0, 0)
-        self.__scroll_layout.addWidget(self.__introduction_frame)
+        self.__tutorial_frame = qt.FrameLayout(self)
+        self.__get_all_frames.append(self.__tutorial_frame)
+        self.__tutorial_frame.frame_btn.setText('教學')
+        self.__tutorial_frame.frame_layout.setContentsMargins(0, 0, 0, 0)
+        self.__scroll_layout.addWidget(self.__tutorial_frame)
         # # layout
         # self.__introduction_frame_layout = QtWidgets.QVBoxLayout()
         # self.__introduction_frame_layout.setObjectName('scroll_layout')
@@ -160,12 +169,14 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
 
         # 2
         self.__project_frame = qt.FrameLayout(self)
+        self.__get_all_frames.append(self.__project_frame)
         self.__project_frame.frame_btn.setText('專案')
         self.__project_frame.frame_layout.setContentsMargins(0, 0, 0, 0)
         self.__scroll_layout.addWidget(self.__project_frame)
 
         # 3
         self.__nodetree_frame = qt.FrameLayout(self)
+        self.__get_all_frames.append(self.__nodetree_frame)
         self.__nodetree_frame.frame_btn.setText('點位表')
         self.__nodetree_frame.frame_layout.setContentsMargins(0, 0, 0, 0)
         self.__scroll_layout.addWidget(self.__nodetree_frame)
@@ -176,9 +187,9 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
 
         # 1
         loader = QtUiTools.QUiLoader()
-        __introduction_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'introduction.ui'))
-        __introduction_frame_ui.setMinimumHeight(__introduction_frame_ui.height())
-        self.__introduction_frame.frame_layout.addWidget(__introduction_frame_ui)
+        self.__tutorial_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'tutorial.ui'))
+        self.__tutorial_frame_ui.setMinimumHeight(self.__tutorial_frame_ui.height())
+        self.__tutorial_frame.frame_layout.addWidget(self.__tutorial_frame_ui)
 
         # # 1.1
         # loader = QtUiTools.QUiLoader()
@@ -189,9 +200,58 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
 
         # 2
         loader = QtUiTools.QUiLoader()
-        __project_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'project.ui'))
-        __project_frame_ui.setMinimumHeight(__project_frame_ui.height())
-        self.__project_frame.frame_layout.addWidget(__project_frame_ui)
+        self.__project_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'project.ui'))
+        self.__project_frame_ui.setMinimumHeight(self.__project_frame_ui.height())
+
+        # avoid GC
+        self.__project_frame_ui.project_path_lineedit = QtWidgets.QLineEdit()
+        self.__project_frame_ui.project_path_lineedit.setEnabled(False)
+        self.__project_frame_ui.project_path_lineedit.setReadOnly(True)
+        self.__project_frame_ui.project_path_button = QtWidgets.QPushButton()
+        self.__project_frame_ui.project_path_button.setText('...')
+        self.__project_frame_ui.project_path_layout.addWidget(self.__project_frame_ui.project_path_lineedit)
+        self.__project_frame_ui.project_path_layout.addWidget(self.__project_frame_ui.project_path_button)
+
+        # avoid GC
+        self.__project_frame_ui.resources_path_lineedit = QtWidgets.QLineEdit()
+        self.__project_frame_ui.resources_path_lineedit.setEnabled(False)
+        self.__project_frame_ui.resources_path_lineedit.setReadOnly(True)
+        self.__project_frame_ui.resources_path_button = QtWidgets.QPushButton()
+        self.__project_frame_ui.resources_path_button.setText('...')
+        self.__project_frame_ui.resources_path_layout.addWidget(self.__project_frame_ui.resources_path_lineedit)
+        self.__project_frame_ui.resources_path_layout.addWidget(self.__project_frame_ui.resources_path_button)
+
+        # self.__project_frame_ui.resource_detail_frame.setEnabled(False)
+
+        # avoid GC
+        self.__project_frame_ui.project_name_label = QtWidgets.QLabel()
+        self.__project_frame_ui.project_name_label.setText('Project')
+        self.__project_frame_ui.project_name_label.setFixedWidth(64)
+        self.__project_frame_ui.project_name_label.setEnabled(False)
+        self.__project_frame_ui.project_name_lineedit = QtWidgets.QLineEdit()
+        self.__project_frame_ui.project_name_lineedit.setReadOnly(True)
+        self.__project_frame_ui.project_name_layout.addWidget(self.__project_frame_ui.project_name_label)
+        self.__project_frame_ui.project_name_layout.addWidget(self.__project_frame_ui.project_name_lineedit)
+
+        # avoid GC
+        self.__project_frame_ui.resources_name_label = QtWidgets.QLabel()
+        self.__project_frame_ui.resources_name_label.setText('Resources')
+        self.__project_frame_ui.resources_name_label.setFixedWidth(64)
+        self.__project_frame_ui.resources_name_label.setEnabled(False)
+        self.__project_frame_ui.resources_name_lineedit = QtWidgets.QLineEdit()
+        self.__project_frame_ui.resources_name_lineedit.setReadOnly(True)
+        self.__project_frame_ui.resources_name_layout.addWidget(self.__project_frame_ui.resources_name_label)
+        # self.__project_frame_ui.resources_name_layout.addWidget(self.__project_frame_ui.resources_name_lineedit)
+
+        self.resources_list_widget = QtWidgets.QListWidget()
+        self.resources_list_widget.setFixedHeight(128)
+        # self.resources_list_widget.addItems(cmds.ls(type='transform'))
+        # self.resources_list_widget.itemClicked.connect(self.selectInListWidget)
+        self.__project_frame_ui.resources_name_layout.addWidget(self.resources_list_widget)
+
+        self.__project_frame_ui.project_path_button.clicked.connect(self.load_project_path)
+        self.__project_frame_ui.resources_path_button.clicked.connect(self.load_resources_path)
+        self.__project_frame.frame_layout.addWidget(self.__project_frame_ui)
 
         # 3
         loader = QtUiTools.QUiLoader()
@@ -199,8 +259,9 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
         __nodetree_frame_ui.setMinimumHeight(__nodetree_frame_ui.height())
         self.__nodetree_frame.frame_layout.addWidget(__nodetree_frame_ui)
 
-        self.__introduction_frame.frame_btn.toggle = False
-        self.__project_frame.frame_btn.toggle = False
+        self.__tutorial_frame.frame_btn.toggle = False
+        self.__project_frame.frame_btn.toggle = True
+        # self.__project_frame.frame_btn.collapsed()
         self.__nodetree_frame.frame_btn.toggle = False
 
         """
@@ -228,6 +289,8 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
 
         self.validate_tab_index()
 
+        self.current_step = 0
+
     def goto_next_tab(self):
         self.__tab.setCurrentIndex(self.__tab.currentIndex() + 1)
         self.validate_tab_index()
@@ -248,6 +311,50 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
     def show_about(self):
         preferences_dialog = AboutDialog(self)
         result = preferences_dialog.exec_()
+
+    def load_project_path(self):
+        path = pm.fileDialog2(fileMode=3)[0]
+        self.__project_frame_ui.project_path_lineedit.setText(path)
+
+        if self.__project_frame_ui.project_path_lineedit is not None:
+            self.__project_frame_ui.project_name_label.setEnabled(True)
+            self.__project_frame_ui.project_name_lineedit.setText(io.basename(path))
+
+    def load_resources_path(self):
+        path = pm.fileDialog2(fileMode=3)[0]
+        self.__project_frame_ui.resources_path_lineedit.setText(path)
+        if self.__project_frame_ui.resources_path_lineedit is not None:
+            self.__project_frame_ui.resources_name_label.setEnabled(True)
+            self.__project_frame_ui.resources_name_lineedit.setText(io.basename(path))
+
+        values = io.list_files(path, 'fbx')
+        keys = io.basenames(values)
+
+        self.resources_dicts = common.rebind_dict(keys, values)
+
+        self.resources_list_widget.clear()
+        self.resources_list_widget.addItems(self.resources_dicts.keys())
+
+    # def load_project_path(self):
+    #     try:
+    #         xmlfile = pm.fileDialog2(fileMode=1)[0]
+    #         if not xmlfile.split('.')[-1] == 'xml':
+    #             print("檔案類型錯誤: 請選擇XML檔案")
+    #             self.nfo_f_ct_le.setText(u'檔案類型錯誤: 請選擇XML檔案')
+    #             self.nfo_f_ct_le.setStyleSheet('background-color: rgb(196, 50, 44); color: rgb(0, 0, 0);')
+    #             return
+    #         print(u"已選擇的XML: \'{}\'".format(xmlfile))
+    #         print("正在匯入 XML檔案 從 ...")
+    #     except TypeError:
+    #         print("操作錯誤: 使用者已取消")
+    #         self.nfo_f_ct_le.setText(u'操作錯誤: 使用者已取消')
+    #         self.nfo_f_ct_le.setStyleSheet('background-color: rgb(196, 50, 44); color: rgb(0, 0, 0);')
+    #         return
+    #     except:
+    #         print("未知錯誤: 發生未知的錯誤")
+    #         self.nfo_f_ct_le.setText(u'未知錯誤: 發生未知的錯誤')
+    #         self.nfo_f_ct_le.setStyleSheet('background-color: rgb(196, 50, 44); color: rgb(0, 0, 0);')
+    #         return
 
 
 if __name__ == "__main__":

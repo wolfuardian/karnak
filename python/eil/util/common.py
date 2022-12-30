@@ -1,3 +1,7 @@
+def rebind_dict(keys, values):
+    return dict(map(lambda i, j: (i, j), keys, values))
+
+
 class AttributeDict(dict):
     __getattr__ = dict.__getitem__
     __setattr__ = dict.__setitem__
@@ -58,12 +62,3 @@ def get_attr_chain(obj, attr_chain):
             return get_attr_chain(getattr(obj, attrs[0]), '.'.join(attrs[1:]))
     else:
         return None
-
-
-def reload_all_mod():
-    import eil.util.common
-    import eil.util.qt
-    reload(eil.util.common)
-    reload(eil.util.qt)
-
-
