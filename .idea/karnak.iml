@@ -5,8 +5,10 @@
       <excludeFolder url="file://$MODULE_DIR$/venv_original" />
       <excludeFolder url="file://$MODULE_DIR$/venvpy3" />
       <excludeFolder url="file://$MODULE_DIR$/venv" />
+      <excludeFolder url="file://$MODULE_DIR$/venv-mayapy" />
+      <excludeFolder url="file://$MODULE_DIR$/venv-py3" />
     </content>
-    <orderEntry type="jdk" jdkName="Maya Python 2.7 (karnak)" jdkType="Python SDK" />
+    <orderEntry type="jdk" jdkName="Python 3.9 (karnak)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
 </module>

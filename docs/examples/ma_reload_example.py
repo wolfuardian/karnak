@@ -1,5 +1,7 @@
 def reload_all():
     print('On exec reload_all function ...')
+
+    # python.eil.util.common
     import python.eil.util.common
     try:
         reload(python.eil.util.common)
@@ -8,10 +10,29 @@ def reload_all():
     except AttributeError:
         pass
 
+    # python.eil.util.qt
     import python.eil.util.qt
     try:
         reload(python.eil.util.qt)
         print('Module python.eil.util.qt has reloaded!')
+
+    except AttributeError:
+        pass
+
+    # python.eil.util.io
+    import python.eil.util.io
+    try:
+        reload(python.eil.util.io)
+        print('Module python.eil.util.io has reloaded!')
+
+    except AttributeError:
+        pass
+
+    # python.eil.mixin.menu
+    import python.eil.mixin.menu
+    try:
+        reload(python.eil.mixin.menu)
+        print('Module python.eil.mixin.menu has reloaded!')
 
     except AttributeError:
         pass

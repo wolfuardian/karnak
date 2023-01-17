@@ -21,15 +21,22 @@
 3. 測試你的第一個腳本，測試腳本可參閱：https://github.com/wolfuardian/karnak/tree/main/eil/docs/examples
    1. 開啟 Maya，打開 Script Editor
    2. 輸入以下程式碼並執行
-      ```python
+
+
+```python
       import maya.cmds as cmds
       
       if not cmds.commandPort(":4434", query=True):
           cmds.commandPort(name=":4434")
-      ```
+```
+
+  
    3. 回到 PyCharm 打開測試用腳本 `qt_dockable_example.py`
    4. 到 `Run`－`Execute document in Maya`
    5. 點擊並在 Maya 視窗中察看結果
+
+以下為最終結果
+
    <br>![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/example_window.png)
    <br>![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/docking_window.png)
    ![image](https://raw.githubusercontent.com/wolfuardian/karnak/main/eil/docs/images/docked_window.png)

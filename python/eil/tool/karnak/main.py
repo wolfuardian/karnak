@@ -65,7 +65,7 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
         self.setWindowTitle(widget_id)
 
         # Used to control the size of the window
-        self.setMinimumSize(400, self.height())
+        self.setMinimumSize(430, self.height())
 
         # Set the basic layout
         layout = QtWidgets.QVBoxLayout()
@@ -175,6 +175,13 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
         self.__scroll_layout.addWidget(self.__project_frame)
 
         # 3
+        self.__resources_frame = qt.FrameLayout(self)
+        self.__get_all_frames.append(self.__resources_frame)
+        self.__resources_frame.frame_btn.setText('資源')
+        self.__resources_frame.frame_layout.setContentsMargins(0, 0, 0, 0)
+        self.__scroll_layout.addWidget(self.__resources_frame)
+
+        # 4
         self.__nodetree_frame = qt.FrameLayout(self)
         self.__get_all_frames.append(self.__nodetree_frame)
         self.__nodetree_frame.frame_btn.setText('點位表')
@@ -198,62 +205,65 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
         #
         # self.__XXXX_frame.frame_layout.addWidget(__XXXX_frame_ui)
 
-        # 2
+        # 2 __project_frame
         loader = QtUiTools.QUiLoader()
         self.__project_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'project.ui'))
         self.__project_frame_ui.setMinimumHeight(self.__project_frame_ui.height())
 
-        # avoid GC
+        # Project Directory
         self.__project_frame_ui.project_path_lineedit = QtWidgets.QLineEdit()
-        self.__project_frame_ui.project_path_lineedit.setEnabled(False)
         self.__project_frame_ui.project_path_lineedit.setReadOnly(True)
         self.__project_frame_ui.project_path_button = QtWidgets.QPushButton()
         self.__project_frame_ui.project_path_button.setText('...')
         self.__project_frame_ui.project_path_layout.addWidget(self.__project_frame_ui.project_path_lineedit)
         self.__project_frame_ui.project_path_layout.addWidget(self.__project_frame_ui.project_path_button)
 
+        # self.__project_frame_ui.resource_detail_frame.setEnabled(False)
+
         # avoid GC
-        self.__project_frame_ui.resources_path_lineedit = QtWidgets.QLineEdit()
-        self.__project_frame_ui.resources_path_lineedit.setEnabled(False)
-        self.__project_frame_ui.resources_path_lineedit.setReadOnly(True)
-        self.__project_frame_ui.resources_path_button = QtWidgets.QPushButton()
-        self.__project_frame_ui.resources_path_button.setText('...')
-        self.__project_frame_ui.resources_path_layout.addWidget(self.__project_frame_ui.resources_path_lineedit)
-        self.__project_frame_ui.resources_path_layout.addWidget(self.__project_frame_ui.resources_path_button)
+        self.__project_frame_ui.project_name_lineedit = QtWidgets.QLineEdit()
+        self.__project_frame_ui.project_name_lineedit.setReadOnly(True)
+        self.__project_frame_ui.detail_layout.addWidget(self.__project_frame_ui.project_name_lineedit)
+
+        self.__project_frame_ui.project_path_button.clicked.connect(self.load_project_path)
+        self.__project_frame.frame_layout.addWidget(self.__project_frame_ui)
+
+        # 3 __resources_frame
+        loader = QtUiTools.QUiLoader()
+        self.__resources_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'resources.ui'))
+        self.__resources_frame_ui.setMinimumHeight(self.__resources_frame_ui.height())
+
+        # avoid GC
+        self.__resources_frame_ui.resources_path_lineedit = QtWidgets.QLineEdit()
+        self.__resources_frame_ui.resources_path_lineedit.setEnabled(False)
+        self.__resources_frame_ui.resources_path_lineedit.setReadOnly(True)
+        self.__resources_frame_ui.resources_path_button = QtWidgets.QPushButton()
+        self.__resources_frame_ui.resources_path_button.setText('...')
+        self.__resources_frame_ui.resources_path_layout.addWidget(self.__resources_frame_ui.resources_path_lineedit)
+        self.__resources_frame_ui.resources_path_layout.addWidget(self.__resources_frame_ui.resources_path_button)
 
         # self.__project_frame_ui.resource_detail_frame.setEnabled(False)
 
         # avoid GC
-        self.__project_frame_ui.project_name_label = QtWidgets.QLabel()
-        self.__project_frame_ui.project_name_label.setText('Project')
-        self.__project_frame_ui.project_name_label.setFixedWidth(64)
-        self.__project_frame_ui.project_name_label.setEnabled(False)
-        self.__project_frame_ui.project_name_lineedit = QtWidgets.QLineEdit()
-        self.__project_frame_ui.project_name_lineedit.setReadOnly(True)
-        self.__project_frame_ui.project_name_layout.addWidget(self.__project_frame_ui.project_name_label)
-        self.__project_frame_ui.project_name_layout.addWidget(self.__project_frame_ui.project_name_lineedit)
-
-        # avoid GC
-        self.__project_frame_ui.resources_name_label = QtWidgets.QLabel()
-        self.__project_frame_ui.resources_name_label.setText('Resources')
-        self.__project_frame_ui.resources_name_label.setFixedWidth(64)
-        self.__project_frame_ui.resources_name_label.setEnabled(False)
-        self.__project_frame_ui.resources_name_lineedit = QtWidgets.QLineEdit()
-        self.__project_frame_ui.resources_name_lineedit.setReadOnly(True)
-        self.__project_frame_ui.resources_name_layout.addWidget(self.__project_frame_ui.resources_name_label)
+        self.__resources_frame_ui.resources_name_label = QtWidgets.QLabel()
+        self.__resources_frame_ui.resources_name_label.setText('Resources')
+        self.__resources_frame_ui.resources_name_label.setFixedWidth(64)
+        self.__resources_frame_ui.resources_name_label.setEnabled(False)
+        self.__resources_frame_ui.resources_name_lineedit = QtWidgets.QLineEdit()
+        self.__resources_frame_ui.resources_name_lineedit.setReadOnly(True)
+        self.__resources_frame_ui.resources_name_layout.addWidget(self.__resources_frame_ui.resources_name_label)
         # self.__project_frame_ui.resources_name_layout.addWidget(self.__project_frame_ui.resources_name_lineedit)
 
         self.resources_list_widget = QtWidgets.QListWidget()
         self.resources_list_widget.setFixedHeight(128)
         # self.resources_list_widget.addItems(cmds.ls(type='transform'))
         # self.resources_list_widget.itemClicked.connect(self.selectInListWidget)
-        self.__project_frame_ui.resources_name_layout.addWidget(self.resources_list_widget)
+        self.__resources_frame_ui.resources_name_layout.addWidget(self.resources_list_widget)
 
-        self.__project_frame_ui.project_path_button.clicked.connect(self.load_project_path)
-        self.__project_frame_ui.resources_path_button.clicked.connect(self.load_resources_path)
-        self.__project_frame.frame_layout.addWidget(self.__project_frame_ui)
+        self.__resources_frame_ui.resources_path_button.clicked.connect(self.load_resources_path)
+        self.__resources_frame.frame_layout.addWidget(self.__resources_frame_ui)
 
-        # 3
+        # 4
         loader = QtUiTools.QUiLoader()
         __nodetree_frame_ui = loader.load("{0}/{1}/{2}".format(ui_path, 'frame', 'node_tree.ui'))
         __nodetree_frame_ui.setMinimumHeight(__nodetree_frame_ui.height())
@@ -262,6 +272,7 @@ class FrameLayoutWidget(mayaMixin.MayaQWidgetDockableMixin, mayaMixin.MayaQWidge
         self.__tutorial_frame.frame_btn.toggle = False
         self.__project_frame.frame_btn.toggle = True
         # self.__project_frame.frame_btn.collapsed()
+        self.__resources_frame.frame_btn.toggle = False
         self.__nodetree_frame.frame_btn.toggle = False
 
         """
