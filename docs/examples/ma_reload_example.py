@@ -19,15 +19,6 @@ def reload_all():
     except AttributeError:
         pass
 
-    # python.eil.util.io
-    import python.eil.util.io
-    try:
-        reload(python.eil.util.io)
-        print('Module python.eil.util.io has reloaded!')
-
-    except AttributeError:
-        pass
-
     # python.eil.mixin.menu
     import python.eil.mixin.menu
     try:
