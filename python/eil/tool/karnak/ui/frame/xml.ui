@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>363</width>
-    <height>48</height>
+    <height>458</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -57,8 +57,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>344</width>
-        <height>57</height>
+        <width>361</width>
+        <height>440</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
@@ -103,13 +103,13 @@
             <widget class="QLabel" name="location_label_2">
              <property name="minimumSize">
               <size>
-               <width>100</width>
+               <width>80</width>
                <height>0</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>100</width>
+               <width>80</width>
                <height>16777215</height>
               </size>
              </property>
@@ -123,7 +123,7 @@
               <enum>Qt::LeftToRight</enum>
              </property>
              <property name="text">
-              <string>施工中...</string>
+              <string>XML目錄:</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -131,27 +131,8 @@
             </widget>
            </item>
            <item row="0" column="1">
-            <layout class="QHBoxLayout" name="location_layout"/>
+            <layout class="QHBoxLayout" name="xml_layout"/>
            </item>
-          </layout>
-         </item>
-         <item>
-          <layout class="QFormLayout" name="formLayout_3">
-           <property name="verticalSpacing">
-            <number>6</number>
-           </property>
-           <property name="leftMargin">
-            <number>3</number>
-           </property>
-           <property name="topMargin">
-            <number>3</number>
-           </property>
-           <property name="rightMargin">
-            <number>3</number>
-           </property>
-           <property name="bottomMargin">
-            <number>3</number>
-           </property>
           </layout>
          </item>
         </layout>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>352</width>
-    <height>143</height>
+    <width>363</width>
+    <height>271</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,6 +20,9 @@
    <string>Form</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="spacing">
+    <number>6</number>
+   </property>
    <property name="leftMargin">
     <number>0</number>
    </property>
@@ -54,84 +57,180 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>350</width>
-        <height>125</height>
+        <width>361</width>
+        <height>253</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="spacing">
+        <number>3</number>
+       </property>
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout">
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <property name="spacing">
+          <number>6</number>
+         </property>
          <property name="leftMargin">
-          <number>0</number>
+          <number>3</number>
          </property>
          <property name="topMargin">
-          <number>0</number>
+          <number>3</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>3</number>
          </property>
          <property name="bottomMargin">
-          <number>0</number>
+          <number>3</number>
          </property>
          <item>
-          <widget class="QLabel" name="Project_Directory_Label">
-           <property name="minimumSize">
-            <size>
-             <width>54</width>
-             <height>0</height>
-            </size>
+          <layout class="QFormLayout" name="formLayout_2">
+           <property name="verticalSpacing">
+            <number>6</number>
            </property>
-           <property name="layoutDirection">
-            <enum>Qt::LeftToRight</enum>
+           <property name="leftMargin">
+            <number>3</number>
            </property>
-           <property name="text">
-            <string>Current Project:</string>
+           <property name="topMargin">
+            <number>3</number>
            </property>
-           <property name="alignment">
-            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           <property name="rightMargin">
+            <number>3</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="location_label_2">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>專案目錄:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="location_layout"/>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="Line" name="line">
+           <property name="orientation">
+            <enum>Qt::Horizontal</enum>
            </property>
           </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="project_path_layout"/>
-         </item>
-        </layout>
-       </item>
-       <item>
-        <layout class="QHBoxLayout" name="horizontalLayout_2">
-         <property name="leftMargin">
-          <number>0</number>
-         </property>
-         <property name="topMargin">
-          <number>0</number>
-         </property>
-         <property name="rightMargin">
-          <number>0</number>
-         </property>
-         <property name="bottomMargin">
-          <number>0</number>
-         </property>
-         <item>
-          <widget class="QLabel" name="Project_Directory_Label_2">
-           <property name="minimumSize">
-            <size>
-             <width>54</width>
-             <height>0</height>
-            </size>
+          <layout class="QFormLayout" name="formLayout_3">
+           <property name="verticalSpacing">
+            <number>6</number>
            </property>
-           <property name="maximumSize">
-            <size>
-             <width>54</width>
-             <height>16777215</height>
-            </size>
+           <property name="leftMargin">
+            <number>3</number>
            </property>
-           <property name="text">
-            <string>專案名稱</string>
+           <property name="topMargin">
+            <number>3</number>
            </property>
-          </widget>
-         </item>
-         <item>
-          <layout class="QHBoxLayout" name="detail_layout"/>
+           <property name="rightMargin">
+            <number>3</number>
+           </property>
+           <property name="bottomMargin">
+            <number>3</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QLabel" name="resources_label_5">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>模型目錄:</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <layout class="QHBoxLayout" name="resources_layout"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="resources_label_6">
+             <property name="minimumSize">
+              <size>
+               <width>80</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>80</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="baseSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="layoutDirection">
+              <enum>Qt::LeftToRight</enum>
+             </property>
+             <property name="text">
+              <string>模型表</string>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <layout class="QHBoxLayout" name="resources_list_layout"/>
+           </item>
+          </layout>
          </item>
         </layout>
        </item>
@@ -143,7 +242,7 @@
          <property name="sizeHint" stdset="0">
           <size>
            <width>20</width>
-           <height>0</height>
+           <height>40</height>
           </size>
          </property>
         </spacer>
